@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-class MyAdapter (private val newList : ArrayList<GeneralFragment>) : RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+class MyAdapter(private val newList : ArrayList<GeneralFragment>) : RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
 
     override fun onCreateView(

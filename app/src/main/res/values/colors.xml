@@ -23,4 +23,5 @@
     <color name="colorNoteColor4">#3A52Fc</color>
     <color name="colorNoteColor5">#000000</color>
     <color name="colorSearchBackground">#333333</color>
+    <color name="underline">#D8D6D6</color>
 </resources>
