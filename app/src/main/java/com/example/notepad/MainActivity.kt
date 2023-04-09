@@ -6,14 +6,13 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import java.util.*
+
 
 class MainActivity : AppCompatActivity() {
 
 
-    private lateinit var newRecyclerView: RecyclerView
-    private lateinit var newArrayList : ArrayList<GeneralFragment>
-    lateinit var imageId : Array<Int>
-    lateinit var heading : Array<String>
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,16 +20,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setFragmentOnScreen(fr = GeneralFragment())
 
-
-
-        newRecyclerView = findViewById(R.id.recyclerView)
-        newRecyclerView.layoutManager = LinearLayoutManager(this)
-        newRecyclerView.setHasFixedSize(true)
-
-        newArrayList = arrayListOf<GeneralFragment>()
-        getUserdata()
     }
 
+   /*
     private fun getUserdata() {
 
         for(i in imageId.indices){
@@ -42,6 +34,7 @@ class MainActivity : AppCompatActivity() {
 
         newRecyclerView.adapter = MyAdapter(newArrayList)
     }
+    */
 
 
     override fun onStart() {
@@ -74,15 +67,6 @@ class MainActivity : AppCompatActivity() {
 
         super.onDestroy()
     }
-
-
-
-
-
-
-
-
-
 
 
     fun setFragmentOnScreen(fr:Fragment){
