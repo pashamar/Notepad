@@ -50,33 +50,18 @@ class GeneralFragment : Fragment() {
         newRecyclerView.layoutManager = LinearLayoutManager(requireContext(),
             LinearLayoutManager.VERTICAL, false);
        val notesList:  ArrayList<Notes> = ArrayList<Notes>()
-        notesList.add(Notes(0, "Купить хлеб", "В пятерочке"))
-        var list:ArrayList<Int> = ArrayList();
 
-        //Размер
-        list.size
-        //Добавить
-        list.add(0)
-        list.add(1)
-        for(n in 2..100){
-            list.add(n)
-        }
-        //Получить по индексу
-        val a:Int = 20
-        //Object методы
-        a.hashCode()
-        a.toString()
-        if(a.equals(10)){
 
-        }else{
-
+        for(n in 0..100){
+            notesList.add(Notes(
+                "https://marketplace.canva.com/EAE9aFhyVRk/1/0/1131w/canva-creative-and-simple-my-notes-paper-lKkcCl_-AyU.jpg",
+                "Индекс:${n}", "В пятерочке"));
         }
 
 
-        newRecyclerView.adapter = MyAdapter(list);
-        newRecyclerView.setHasFixedSize(true)
 
-       // newArrayList = arrayListOf<GeneralFragment>()
+        newRecyclerView.adapter = MyAdapter(notesList);
+
         mAddImageBtn.setOnClickListener {
             createNote();
         }

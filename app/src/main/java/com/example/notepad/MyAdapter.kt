@@ -1,27 +1,39 @@
 package com.example.notepad
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.imageview.ShapeableImageView
 import java.util.*
 
-class MyAdapter(private val newList : ArrayList<Int>)
-    : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
+class MyAdapter(private val newList : ArrayList<Notes>)
+    : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val itemItem:View = LayoutInflater.from(parent.context).inflate(R.layout.list_item,
-            parent, false)
-        return  MyViewHolder(itemView = itemItem)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return if(viewType == 0){
+            val itemItem:View = LayoutInflater.from(parent.context).inflate(R.layout.list_item,
+                parent, false)
+            MyViewHolder(itemView = itemItem)
+        }else{
+            val itemItem:View = LayoutInflater.from(parent.context).inflate(R.layout.list_item_second,
+                parent, false)
+            MyViewHolderSecond(itemView = itemItem)
+        }
+
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-      holder.bind(newList[position])
-        //1, 2, 3, 4, 5, 6
-        //0, 1, 2, 3, 4, 5
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if(holder is MyViewHolder){
+            holder.bindFirst(newList[position])
+        }
+        if(holder is MyViewHolderSecond){
+            holder.bindSecond(newList[position])
+        }
 
     }
 
@@ -29,15 +41,52 @@ class MyAdapter(private val newList : ArrayList<Int>)
       return newList.size
     }
 
+    override fun getItemViewType(position: Int): Int {
+        return if(newList[position].titleImage.isEmpty()){
+            1;
+        }else{
+            0;
+        }
+    }
+
+
+
     class MyViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
         lateinit var mTitleText:TextView
+        lateinit var mDescriptionText:TextView
+        lateinit var mTitleImage: ShapeableImageView
 
-        fun bind(item:Int){
-            mTitleText = itemView.findViewById(R.id.Heading)
-            mTitleText.setText("Элемент с номером ${item}")
+        fun bindFirst(item:Notes){
+            initView();
+            mTitleText.text = item.heading
+            mDescriptionText.text = item.description
+            mTitleImage.setImageURI(Uri.parse(item.titleImage));
 
         }
 
+        fun initView(){
+            mTitleText = itemView.findViewById(R.id.Heading)
+            mDescriptionText = itemView.findViewById(R.id.description)
+            mTitleImage = itemView.findViewById(R.id.title_image)
+        }
+    }
+
+    class MyViewHolderSecond(itemView : View) : RecyclerView.ViewHolder(itemView){
+        lateinit var mTitleText:TextView
+        lateinit var mDescriptionText:TextView
+
+        fun bindSecond(item:Notes){
+            initView();
+            mTitleText.text = item.heading
+            mDescriptionText.text = item.description
+
+
+        }
+
+        fun initView(){
+            mTitleText = itemView.findViewById(R.id.Heading)
+            mDescriptionText = itemView.findViewById(R.id.description)
+        }
     }
 
 
